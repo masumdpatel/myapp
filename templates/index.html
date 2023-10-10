@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.task_description.label }}
+        {{ form.task_description() }}
+        {{ form.submit() }}
+    </form>
+    
+    <h2>Tasks</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
