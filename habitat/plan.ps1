@@ -22,7 +22,7 @@ function Invoke-Install {
 
     # Install pip/virtualenv packages on top of Python dependency (i.e. site packages)
     python -m ensurepip --default-pip
-    pyhton -m pip install --upgrade pip
+    python -m pip install --upgrade pip
     python -m pip install virtualenv
 
     # Create virtualenv for our dependencies & install
