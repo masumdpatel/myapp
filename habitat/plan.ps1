@@ -1,4 +1,4 @@
-$pkg_name = "myapp"
+$pkg_name = "myappwindows"
 $pkg_origin = "masumdpatel"
 $pkg_version = "0.1.0"
 $pkg_maintainer = "Maintainers <Masum>"
