@@ -22,12 +22,12 @@ function Invoke-Install {
 
     # Install pip/virtualenv packages on top of Python dependency (i.e. site packages)
     python -m ensurepip --default-pip
-    pip install --upgrade pip
-    pip install virtualenv
+    pyhton -m pip install --upgrade pip
+    python -m pip install virtualenv
 
     # Create virtualenv for our dependencies & install
     virtualenv "$app_dir\tsenv"
     & "$app_dir\tsenv\Scripts\Activate"
-    pip install -r "$app_dir\requirements.txt"
+    pyhton -m pip install -r "$app_dir\requirements.txt"
 }
 
