@@ -28,6 +28,6 @@ function Invoke-Install {
     # Create virtualenv for our dependencies & install
     virtualenv "$app_dir\tsenv"
     & "$app_dir\tsenv\Scripts\Activate"
-    pyhton -m pip install -r "$app_dir\requirements.txt"
+    python -m pip install -r "$app_dir\requirements.txt"
 }
 
