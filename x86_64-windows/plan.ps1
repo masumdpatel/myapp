@@ -14,21 +14,20 @@ function Invoke-Build {
 
 # Define a function for the installation step.
 function Invoke-Install {
-    $app_dir = "$HAB_CACHE_SRC_PATH\$pkg_name"	
-
+    $app_dir = Join-Path -Path $HAB_CACHE_SRC_PATH -ChildPath $pkg_name
     New-Item -ItemType Directory -Path $app_dir | Out-Null
-    Copy-Item -Path "app.py" -Destination "$app_dir\"
-    Copy-Item -Path "requirements.txt" -Destination "$app_dir\"
-    Copy-Item -Path "templates\" -Destination "$app_dir\" -Recurse
+    Copy-Item -Path "app.py" -Destination $app_dir
+    Copy-Item -Path "requirements.txt" -Destination $app_dir
+    Copy-Item -Path "templates\" -Destination $app_dir -Recurse
 
     # Install pip/virtualenv packages on top of Python dependency (i.e. site packages)
-    python -m ensurepip --upgrade:
+    python -m ensurepip --upgrade
     python -m pip install --upgrade pip
     python -m pip install virtualenv
 
     # Create virtualenv for our dependencies & install
-    virtualenv "$app_dir\tsenv"
-    & "$app_dir\tsenv\Scripts\Activate"
-    python -m pip install -r "$app_dir\requirements.txt"
+    virtualenv (Join-Path -Path $app_dir -ChildPath "tsenv")
+    & (Join-Path -Path $app_dir -ChildPath "tsenv\Scripts\Activate")
+    python -m pip install -r (Join-Path -Path $app_dir -ChildPath "requirements.txt")
 }
 
