@@ -1,0 +1,8 @@
+# Redirect stderr to stdout
+2>&1
+
+# Activate the virtual environment
+. "{{pkg.svc_data_path}}\{{pkg.name}}\tsenv\Scripts\Activate"
+
+# Run the flask app
+python "{{pkg.svc_data_path}}\{{pkg.name}}\app.py"

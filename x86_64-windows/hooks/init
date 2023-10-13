@@ -1,0 +1,6 @@
+# Redirect stderr to stdout
+2>&1
+
+# Copy artifacts across
+Copy-Item -Path "{{pkg.path}}\{{pkg.name}}" -Destination "{{pkg.svc_data_path}}" -Recurse
+
