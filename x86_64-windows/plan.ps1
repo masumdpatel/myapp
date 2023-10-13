@@ -14,11 +14,13 @@ function Invoke-Build {
 
 # Define a function for the installation step.
 function Invoke-Install {
-    $app_dir = "$HAB_CACHE_SRC_PATH\$pkg_name"
+    $app_dir = "$HAB_CACHE_SRC_PATH\$pkg_name"	
+    $sourceDir = "C:\src\Document\myapp\"
+
     New-Item -ItemType Directory -Path $app_dir | Out-Null
-    Copy-Item -Path "app.py" -Destination "$app_dir\"
-    Copy-Item -Path "requirements.txt" -Destination "$app_dir\"
-    Copy-Item -Path "templates\" -Destination "$app_dir\" -Recurse
+    Copy-Item -Path "$sourceDir\app.py" -Destination "$app_dir\"
+    Copy-Item -Path "$sourceDir\requirements.txt" -Destination "$app_dir\"
+    Copy-Item -Path "$sourceDir\templates\" -Destination "$app_dir\" -Recurse
 
     # Install pip/virtualenv packages on top of Python dependency (i.e. site packages)
     python -m ensurepip --upgrade:
