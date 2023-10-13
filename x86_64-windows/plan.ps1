@@ -15,7 +15,7 @@ function Invoke-Build {
 # Define a function for the installation step.
 function Invoke-Install {
     $app_dir = "$HAB_CACHE_SRC_PATH\$pkg_name"	
-    $sourceDir = "C:\src\Document\myapp\"
+    $sourceDir = "c:\Users\Administrator\Document\myapp\"
 
     New-Item -ItemType Directory -Path $app_dir | Out-Null
     Copy-Item -Path "$sourceDir\app.py" -Destination "$app_dir\"
