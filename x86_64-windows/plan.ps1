@@ -17,8 +17,8 @@ function Invoke-Install {
     $app_dir = Join-Path -Path $HAB_CACHE_SRC_PATH -ChildPath $pkg_name
     New-Item -ItemType Directory -Path $app_dir | Out-Null
     Copy-Item -Path "..\app.py" -Destination $app_dir
-    Copy-Item -Path "requirements.txt" -Destination $app_dir
-    Copy-Item -Path "templates\" -Destination $app_dir -Recurse
+    Copy-Item -Path "..\requirements.txt" -Destination $app_dir
+    Copy-Item -Path "..\templates\" -Destination $app_dir -Recurse
 
     # Install pip/virtualenv packages on top of Python dependency (i.e. site packages)
     python -m ensurepip --upgrade
