@@ -16,7 +16,7 @@ function Invoke-Build {
 function Invoke-Install {
     $app_dir = Join-Path -Path $HAB_CACHE_SRC_PATH -ChildPath $pkg_name
     New-Item -ItemType Directory -Path $app_dir | Out-Null
-    Copy-Item -Path "app.py" -Destination $app_dir
+    Copy-Item -Path "..\app.py" -Destination $app_dir
     Copy-Item -Path "requirements.txt" -Destination $app_dir
     Copy-Item -Path "templates\" -Destination $app_dir -Recurse
 
