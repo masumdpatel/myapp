@@ -1,9 +1,7 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: kibana install & then Uninstall
 environment: 
- name: test
+  name: test
 
 on:
   push:
@@ -12,18 +10,18 @@ on:
     branches: [ "main" ]
 
 jobs:
-  Update-Packages:
+  update_packages:
     runs-on: 'centos:latest'
-
-    steps:
     env: # Or as an environment variable
       SSH_KEY: ${{ secrets.SSH_KEY }}
-    - name: Uninstall the old packages
-      run: |
-        echo $SSH_KEY >> ssh_file
-        chmod 400 ssh_file
-        ssh -i "ssh_file" root@54.144.78.186 'bash -s' < ./kibanauni.sh
-    - name: Installing new packages
-      run: |
-        ssh root@54.144.78.186 'bash -s' < ./kibanainstall.sh
-   
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Uninstall the old packages
+        run: |
+          echo $SSH_KEY >> ssh_file
+          chmod 400 ssh_file
+          ssh -i "ssh_file" root@54.144.78.186 'bash -s' < ./kibanauni.sh
+      - name: Installing new packages
+        run: |
+          ssh root@54.144.78.186 'bash -s' < ./kibanainstall.sh
