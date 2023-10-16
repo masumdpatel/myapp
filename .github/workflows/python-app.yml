@@ -19,7 +19,7 @@ jobs:
         run: |
           echo $SSH_KEY >> ssh_file
           chmod 400 ssh_file
-          ssh -i "ssh_file" root@54.144.78.186 'bash -s' < ./kibanauni.sh
+          ssh -i "ssh_file" root@54.144.78.186 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
-          ssh root@54.144.78.186 'bash -s' < ./kibanainstall.sh
+          ssh root@54.144.78.186 'bash -s' < ./install.sh
