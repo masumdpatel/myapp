@@ -31,6 +31,7 @@ jobs:
       #     ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} 'bash -s' < ./verify.sh
   
   update_packages_qa:
+    needs: update_packages_test
     runs-on: ubuntu-latest
     environment: qa
     steps:
