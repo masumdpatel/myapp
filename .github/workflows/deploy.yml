@@ -22,14 +22,14 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           cat ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no root@54.144.78.186 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
           echo $PAPI_KEY > ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./install.sh
+          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no root@54.144.78.186 'bash -s' < ./install.sh
       - name: Verify the Package
         run: |
           echo $PAPI_KEY > ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./verify.sh
+          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no root@54.144.78.186 'bash -s' < ./verify.sh
