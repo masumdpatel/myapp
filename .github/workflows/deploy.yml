@@ -1,5 +1,5 @@
 
-name: kibana install & then Uninstall
+name: Deploy
 on:
   push:
     branches: [ "main" ]
