@@ -19,10 +19,10 @@ jobs:
         run: |
           echo $SSH_KEY >> ssh_file
           chmod 400 ssh_file
-          ssh -i "ssh_file" root@54.144.78.186 'bash -s' < ./uninstall.sh
+          ssh -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
-          ssh  -i "ssh_file" root@54.144.78.186 'bash -s' < ./install.sh
+          ssh  -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./install.sh
       - name: Verify the Package
         run: |
-          ssh  -i "ssh_file" root@54.144.78.186 'bash -s' < ./verify.sh
+          ssh  -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./verify.sh
