@@ -21,12 +21,12 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           cat ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ env.USER_NAME_TEST }}@${{ env.USER_NAME_TEST }} 'bash -s' < ./uninstall.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ env.USER_NAME_TEST }}@${{ env.HOST_NAME_TEST }} 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ env.USER_NAME_TEST }}${{ env.USER_NAME_TEST }} 'bash -s' < ./install.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ env.USER_NAME_TEST }}${{ env.HOST_NAME_TEST }} 'bash -s' < ./install.sh
      
   update_packages_qa:
     runs-on: ubuntu-latest
