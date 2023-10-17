@@ -15,8 +15,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Uninstall the old packages
         env: 
-          HOSTNAME_TEST: ${ { var.HOST_NAME_TEST } }
-          USER_TEST: ${ { var.USER_NAME_TEST } }
+          HOST_NAME_TEST: ${ { var.HOST_NAME_TEST } }
+          USER_NAME_TEST: ${ { var.USER_NAME_TEST } }
 
         run: |
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
