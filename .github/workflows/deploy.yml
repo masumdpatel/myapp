@@ -49,6 +49,6 @@ jobs:
           ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} 'bash -s' < ./install.sh
       # - name: Verify the Package
       #   run: |
-      #     eecho "${{ secrets.SSH_KEY }}" > ssh_file.pem
+      #     eecho "${{ secrets.SSH_KEY_QA }}" > ssh_file.pem
       #     chmod 600 ssh_file.pem
       #     ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} 'bash -s' < ./verify.sh    
