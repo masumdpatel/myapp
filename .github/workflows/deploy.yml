@@ -19,7 +19,7 @@ jobs:
         # env: # Or as an environment variable
         #  SSH_KEY: ${{ env.PAPI_KEY }}
         run: |
-          echo $PAPI_KEY> ssh_file.pem
+          echo ${{ env.PAPI_KEY }}> ssh_file.pem
           cat ssh_file.pem
           chmod 600 ssh_file.pem
           ssh -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
