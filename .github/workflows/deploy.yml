@@ -16,6 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Uninstall the old packages
+        env: # Or as an environment variable
+         SSH_KEY: ${{ secrets.SSH_KEY }}
         run: |
           echo $SSH_KEY > ssh_file.pem
           cat ssh_file.pem
