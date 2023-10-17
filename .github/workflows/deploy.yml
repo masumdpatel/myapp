@@ -17,12 +17,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Uninstall the old packages
         run: |
-          echo $SSH_KEY >> ssh_file
-          chmod 400 ssh_file
-          ssh -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
+          echo $SSH_KEY >> ssh_file.pem
+          chmod 400 ssh_file.pem
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
-          ssh  -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./install.sh
+          echo $SSH_KEY >> ssh_file.pem
+          chmod 400 ssh_file.pem
+          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./install.sh
       - name: Verify the Package
         run: |
-          ssh  -i "ssh_file" -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./verify.sh
+          echo $SSH_KEY >> ssh_file.pem
+          chmod 400 ssh_file.pem
+          ssh  -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./verify.sh
