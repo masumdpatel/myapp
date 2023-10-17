@@ -18,6 +18,7 @@ jobs:
       - name: Uninstall the old packages
         run: |
           echo $SSH_KEY > ssh_file.pem
+          cat ssh_file.pem
           chmod 600 ssh_file.pem
           ssh -i ssh_file.pem -o StrictHostKeyChecking=no ec2-user@54.144.78.186 'bash -s' < ./uninstall.sh
       - name: Installing new packages
