@@ -10,8 +10,9 @@ jobs:
   update_packages_test:
     runs-on: ubuntu-latest
     environment: test
-    #  env: # Or as an environment variable
-    #    USER_NAME_TEST: ${{ var.USER_NAME_TEST }}
+    env: # Or as an environment variable
+       USER_NAME_TEST: ${{ var.USER_NAME_TEST }}
+       HOST_NAME_TEST: ${{ var.USER_NAME_TEST }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,16 +21,20 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           cat ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { var.USER_NAME_TEST } }@${ { var.HOST_NAME_TEST } } 'bash -s' < ./uninstall.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { env.USER_NAME_TEST } }@${ { env.HOST_NAME_TEST } } 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { var.USER_NAME_TEST } }@${ { var.HOST_NAME_TEST } } 'bash -s' < ./install.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { env.USER_NAME_TEST } }@${ { env.HOST_NAME_TEST } } 'bash -s' < ./install.sh
      
   update_packages_qa:
     runs-on: ubuntu-latest
     environment: qa
+    env: # Or as an environment variable
+       USER_NAME_QA: ${{ var.USER_NAME_QA }}
+       HOST_NAME_QA: ${{ var.USER_NAME_QA }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,10 +43,10 @@ jobs:
           echo "${{ secrets.SSH_KEY_QA }}" > ssh_file.pem
           cat ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { var.USER_NAME_QA } }@${ { var.HOST_NAME_QA } } 'bash -s' < ./uninstall.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { env.USER_NAME_QA } }@${ { env.HOST_NAME_QA } } 'bash -s' < ./uninstall.sh
       - name: Installing new packages
         run: |
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
           chmod 600 ssh_file.pem
-          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { var.USER_NAME_QA } }@${ { var.HOST_NAME_QA } } 'bash -s' < ./install.sh
+          ssh -i ssh_file.pem -o StrictHostKeyChecking=no { { env.USER_NAME_QA } }@${ { env.HOST_NAME_QA } } 'bash -s' < ./install.sh
     
