@@ -1,24 +1,56 @@
 #!/bin/bash
 
-#ssh as root user
+DATE=$(date +"%Y-%m-%d")
+LOG_FILES_LOCATION="/opt/deploy_logs"
+# Define the paths to the original file and the backup file
+DSM_SYS="/home/ec2-user/timesstamp.txt"
+DSM_SYS_BACK="/tmp/timestamp-$DATE.txt"
+
+
+check_and_move_file() {
+    if [ -e "$1" ]; then
+        echo "The original file already exists. No action needed." >> "$LOG_FILES_LOCATION/installation-logs-$DATE.txt"
+    else
+        # Move the backup file to the location of the original file
+        mv "$2" "$1"
+        echo "Moved the backup file to the location of the original file." >> "$LOG_FILES_LOCATION/installation-logs-$DATE.txt"
+    fi
+}
+
+# Check and move the dsm.sys file
+check_and_move_file "$DSM_SYS" "$DSM_SYS_BACK"
+
 
 #Change directory to /tmp
 cd /tmp
 
-#Download the kibana
+#Download the tarball to /tmp
+echo "Starting the downloading of package kibana to /tmp" >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
 wget https://artifacts.elastic.co/downloads/kibana/kibana-8.10.3-x86_64.rpm
 
-# #Expand the tarball
-# tar -xzf /tmp/SP_CLIENT_8.1.17_LIN86_ML.tar.gz
-
-# #Change directory to /tmp/TSMCLI_LNX/tsmcli/linux86
-# cd TSMCLI_LNX/tsmcli/linux86
-
-# Install the 64-bit rom package
+echo "Starting the installation of kibana" >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
 sudo rpm --install kibana-8.10.3-x86_64.rpm
 
-# # Install the TSM 64-bit API packages
-# rpm -i TIVsm-API64.x86_64.rpm TIVsm-APIcit.x86_64.rpm
+STATUS=$?
+if [[ $STATUS -eq 0 ]]
+then 
+    echo "Package is installed" >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
+else
+    echo "Installation failed" >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
+fi
 
-# # Install the TSM backup-archive (B/A) client packages
-# rpm -i TIVsm-BA.x86_64.rpm TIVsm-BAcit.x86_64.rpm
+# Install the TSM backup-archive (B/A) client packages
+echo "Start the Installation of TSM backup-archive (B/A) client packages" >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
+rpm -i TIVsm-BA.x86_64.rpm TIVsm-BAcit.x86_64.rpm >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
+
+# Count the number of Kibana processes running
+kibana_processes=$(ps -ef | grep kibana | wc -l)
+
+# Check if there is more than one Kibana process
+
+if [[ $kibana_processes -gt 1 ]]; then
+    echo "Kibana service is already running." >> log.txt
+else
+    systemctl start kibana
+    echo "Kibana has been started." >> log.txt
+fi
