@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 LOG_FILES_LOCATION="/opt/deploy_logs"
 DATE=$(date +"%Y-%m-%d-%H-%M")
 
@@ -34,7 +34,7 @@ if [ ! -d "$LOG_FILES_LOCATION" ]; then
 fi
 
 #take tha backup of the dsm.sys and dsm.opt files.
-echo "Taking backup of importanat files" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
+echo "Taking backup of important files" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
 cp -p /home/ec2-user/timestamp.txt /tmp/timestamp-$DATE.txt
 # cp -p /opt/tivoli/tsm/client/ba/bin/dsm.opt /tmp/dsm.opt-$DATE
 

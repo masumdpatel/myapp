@@ -16,7 +16,6 @@ jobs:
       - name: Uninstall the old packages
         run: |
           echo "${{ secrets.SSH_KEY }}" > ssh_file.pem
-          cat ssh_file.pem
           chmod 600 ssh_file.pem
           ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} 'bash -s' < ./uninstall.sh
       - name: Installing new packages
@@ -40,7 +39,6 @@ jobs:
       - name: Uninstall the old packages
         run: |
           echo "${{ secrets.SSH_KEY_QA }}" > ssh_file.pem
-          cat ssh_file.pem
           chmod 600 ssh_file.pem
           ssh -i ssh_file.pem -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} 'bash -s' < ./uninstall.sh
       - name: Installing new packages
