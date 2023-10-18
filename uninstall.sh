@@ -11,7 +11,7 @@ kill_process() {
         if [[ $CHECK_PROCESS -gt 1 ]]; then
 		echo "$1 proccess is running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
 		echo "killing proccess for $1" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
-		killall $1
+		systemctl stop kibana
         else
         	echo "$1 proccess is not running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
         fi
