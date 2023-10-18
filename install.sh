@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -x
 DATE=$(date +"%Y-%m-%d")
 LOG_FILES_LOCATION="/opt/deploy_logs"
 # Define the paths to the original file and the backup file

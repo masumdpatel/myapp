@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -x
 LOG_FILES_LOCATION="/opt/deploy_logs"
 DATE=$(date +"%Y-%m-%d-%H-%M")
 
