@@ -68,3 +68,4 @@ fi
 
 # Removing the 7 days old log file.
 find $LOG_FILES_LOCATION/ -type f -mtime +7 -exec rm -rf {} \;
+
