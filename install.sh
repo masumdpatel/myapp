@@ -45,7 +45,7 @@ else
 fi
 
 echo "Starting the process..."
-service start kibana >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
+systemctl start kibana >> $LOG_FILES_LOCATION/installation-logs-$DATE.txt
 
 STATUS=$?
 if [[ $STATUS -eq 0 ]]
