@@ -2,7 +2,7 @@
 
 set -e
 LOG_FILES_LOCATION="/opt/deploy_logs"
-DATE=$(date +"%Y-%m-%d")
+DATE=$(date +"%Y-%m-%d-%H-%M")
 
 #function for proccess kill
 kill_process() {
