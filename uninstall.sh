@@ -7,14 +7,13 @@ DATE=$(date +"%Y-%m-%d")
 #function for proccess kill
 kill_process() {
         CHECK_PROCESS=$(ps -ef | grep $1 | wc -l)
-        echo "current process running for $1 $CHECK_PROCESS" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
 
         if [[ $CHECK_PROCESS -gt 1 ]]; then
-        echo "$1 proccess is running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
-        echo "killing proccess for $1" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
-        killall $1
+		echo "$1 proccess is running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
+		echo "killing proccess for $1" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
+		killall $1
         else
-        echo "$1 proccess is not running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
+        	echo "$1 proccess is not running" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
         fi
 }
 
@@ -39,14 +38,11 @@ echo "Taking backup of importanat files" >> $LOG_FILES_LOCATION/unistallation-lo
 cp -p /home/ec2-user/timestamp.txt /tmp/timestamp-$DATE.txt
 # cp -p /opt/tivoli/tsm/client/ba/bin/dsm.opt /tmp/dsm.opt-$DATE
 
-#kill the process for dsmc
 kill_process kibana
+remove_packages kibana
+
 # #kill the process for dsmcad
 # kill_process dsmcad
-
-# Call the function to remove TIV packages
-remove_packages kibana # TIV == package1 package2
-# # Call the function to remove GSK packages
 # remove_packages GSK 
 
 
