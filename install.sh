@@ -1,9 +1,10 @@
 #!/bin/bash
 
+set -e
 DATE=$(date +"%Y-%m-%d")
 LOG_FILES_LOCATION="/opt/deploy_logs"
 # Define the paths to the original file and the backup file
-DSM_SYS="/home/ec2-user/timesstamp.txt"
+DSM_SYS="/home/ec2-user/timestamp.txt"
 DSM_SYS_BACK="/tmp/timestamp-$DATE.txt"
 
 
