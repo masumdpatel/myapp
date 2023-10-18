@@ -20,11 +20,15 @@ kill_process() {
 # Function to remove packages
 remove_packages() {
         PACKAGE_LIST=$(rpm -qa | grep $1)
-        for package in $PACKAGE_LIST;
-        do
-                echo "removing PACKAGE of $1" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
-                rpm -e "$package"
-        done
+        if [ -z "$PACKAGE_LIST" ]; then
+	    echo "$1 is not available on machine, Skipping the unistallation."
+	else
+	    for package in $PACKAGE_LIST;
+	    do
+		echo "removing $1" >> $LOG_FILES_LOCATION/unistallation-logs-$DATE.txt
+		rpm -e "$package"
+	    done
+	fi
 }
 
 #define directory to store the logs
